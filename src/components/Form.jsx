@@ -1,7 +1,21 @@
-import React from "react";
 import Button from "./Button";
+import { useState } from "react";
 
 const Form = () => {
+  const [task, setTask] = useState({});
+  const handleChange = (e) => {
+    //get name and its value from text box
+    const { name, value } = e.target;
+    //[name] because we want value of name is task or hour, not name itselt.
+    //value is still value not change
+    setTask({ ...task, [name]: value });
+  };
+
+  const handleAddList = (e) => {
+    e.preventDefault();
+    addList(task);
+    // console.log(task);
+  };
   return (
     <>
       <h1 className="text-center">Not To Do List</h1>
@@ -9,7 +23,11 @@ const Form = () => {
         <!-- class p-5 is for padding all follow up breakpoint -->
         <!-- class rounded sharp the cornor of border -->
         <!-- shadow is for making shadow --> */}
-      <form action="" class="border p-5 rounded shadow mt-5">
+      <form
+        action=""
+        className="border p-5 rounded shadow mt-5"
+        onSubmit={handleAddList}
+      >
         {/* <!-- g-2 is a gab bewteen column when this become responsive --> */}
         <div className="row g-2">
           {/* <!-- add md between col and 7 is to make it repsonesive to the breakpoint in the list --> */}
@@ -21,6 +39,7 @@ const Form = () => {
               aria-label="task"
               name="task"
               required
+              onChange={handleChange}
             />
           </div>
           <div className="col-md-2">
@@ -32,6 +51,7 @@ const Form = () => {
               name="hour"
               min="1"
               required
+              onChange={handleChange}
             />
           </div>
           {/* <!-- d-grid mean: to tell the parent that is will expand to fill the rest blank space --> */}
