@@ -1,5 +1,6 @@
 import React from "react";
 import TableList from "./TableList";
+import Message from "./Message";
 
 const DisplayList = () => {
   return (
@@ -10,27 +11,14 @@ const DisplayList = () => {
           <h3 className="text-center">Entry List</h3>
           <hr />
           <TableList id="entryList" />
-          <div className="alert alert-success">
-            The total hours allocated =
-            <span id="entryHour" className="text-primary">
-              {" "}
-              0{" "}
-            </span>{" "}
-            hr
-          </div>
+          <Message id="entryHour" text="The total hours allocated =" />
         </div>
 
         <div className="col-md">
           <h3 className="text-center">Bad List</h3>
           <hr />
           <TableList id="badList" />
-          <div className="alert alert-success">
-            You could have saved =
-            <span id="badHour" className="text-primary">
-              0
-            </span>{" "}
-            hr
-          </div>
+          <Message id="badHour" text="You could have saved =" />
         </div>
       </div>
     </>
