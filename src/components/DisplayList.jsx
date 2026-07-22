@@ -2,7 +2,7 @@ import React from "react";
 import TableList from "./TableList";
 import Message from "./Message";
 
-const DisplayList = ({ taskList }) => {
+const DisplayList = ({ taskList, switchList }) => {
   // console.log("display", taskList);
   return (
     <>
@@ -11,14 +11,18 @@ const DisplayList = ({ taskList }) => {
         <div className="col-md">
           <h3 className="text-center">Entry List</h3>
           <hr />
-          <TableList id="entryList" taskList={taskList} />
+          <TableList
+            id="entryList"
+            taskList={taskList}
+            switchList={switchList}
+          />
           <Message id="entryHour" text="The total hours allocated = " />
         </div>
 
         <div className="col-md">
           <h3 className="text-center">Bad List</h3>
           <hr />
-          <TableList id="badList" taskList={taskList} />
+          <TableList id="badList" taskList={taskList} switchList={switchList} />
           <Message id="badHour" text="You could have saved = " />
         </div>
       </div>

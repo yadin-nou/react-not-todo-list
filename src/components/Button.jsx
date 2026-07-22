@@ -1,9 +1,11 @@
 import React from "react";
 
-const Button = ({ clColor, label }) => {
+const Button = (props) => {
   return (
     <>
-      <button className={"btn " + clColor}>{label}</button>
+      <button className={"btn " + props.clColor} onClick={props.handleSwitch}>
+        {props.label}
+      </button>
     </>
   );
 };

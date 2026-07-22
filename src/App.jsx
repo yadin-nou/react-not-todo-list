@@ -31,6 +31,26 @@ const App = () => {
     //displayList();
   };
 
+  const switchList = (id, type) => {
+    if (type === "entry") {
+      //   update type in taskList by unqiue id
+      setTaskList(
+        taskList.map((item) =>
+          item.id === id ? { ...item, type: "bad" } : item,
+        ),
+      );
+      // console.log("entry", id, type);
+    }
+    if (type === "bad") {
+      setTaskList(
+        taskList.map((item) =>
+          item.id === id ? { ...item, type: "entry" } : item,
+        ),
+      );
+      // console.log("bad", id, type);
+    }
+  };
+  // console.log(taskList);
   const idGeneration = (length = 6) => {
     const str =
       "pxzksjkjfoiajhklajoinakljhhanskjeiABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
@@ -46,7 +66,7 @@ const App = () => {
     <div className="wrapper">
       <div className="container">
         <Form addTask={addTask} />
-        <DisplayList taskList={taskList}></DisplayList>
+        <DisplayList taskList={taskList} switchList={switchList}></DisplayList>
       </div>
     </div>
   );
