@@ -1,8 +1,8 @@
 import Button from "./Button";
 import { useState } from "react";
 
-const Form = () => {
-  const [task, setTask] = useState({});
+const Form = ({ addTask }) => {
+  const [task, setTask] = useState([]);
   const handleChange = (e) => {
     //get name and its value from text box
     const { name, value } = e.target;
@@ -13,7 +13,7 @@ const Form = () => {
 
   const handleAddList = (e) => {
     e.preventDefault();
-    addList(task);
+    addTask(task);
     // console.log(task);
   };
   return (

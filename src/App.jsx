@@ -4,35 +4,49 @@ import Form from "./components/Form";
 import DisplayList from "./components/DisplayList";
 
 const App = () => {
-  const addTask = (e) => {
-    // Use formData constructure is easy than the other method if you have a large text filed
+  let hourPerWeek = 24 * 7;
+  const [taskList, setTaskList] = useState([]);
 
-    const newForm = new FormData(e);
-    // use .get method only get data from element name, not ID
-    const task = newForm.get("task");
-    //this + is covert string from form into number
-    const hour = +newForm.get("hour");
+  const addTask = (lists) => {
+    const task = lists.task;
+    const hour = lists.hour;
     const obj = {
       task,
       hour,
       id: idGeneration(),
       type: "entry",
     };
-    console.log(getTotalHour);
-    if (getTotalHour() + hour > hourPerWeek) {
-      alert("Sorry no more hour then 168 per week");
-      return;
-    }
-    taskList.push(obj);
+    // this doesn't work because the key hold the object not spread object
+    //setTaskList({ ...taskList, obj });
+    setTaskList([...taskList, obj]);
+    /*OR When you pass a function,
+     React guarantees prev is the latest state at the time the update actually runs
+    setTaskList((prev) => [...prev, obj]);*/
+
+    // if (getTotalHour() + hour > hourPerWeek) {
+    //   alert("Sorry no more hour then 168 per week");
+    //   return;
+    // }
 
     //displayList();
+  };
+
+  const idGeneration = (length = 6) => {
+    const str =
+      "pxzksjkjfoiajhklajoinakljhhanskjeiABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    let id = "";
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * str.length);
+      id += str[randomIndex];
+    }
+    return id;
   };
 
   return (
     <div className="wrapper">
       <div className="container">
-        <Form />
-        <DisplayList></DisplayList>
+        <Form addTask={addTask} />
+        <DisplayList taskList={taskList}></DisplayList>
       </div>
     </div>
   );
