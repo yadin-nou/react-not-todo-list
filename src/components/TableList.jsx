@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "./Button";
 
-const TableList = ({ id, taskList, switchList }) => {
+const TableList = ({ id, taskList, switchList, deleteTask }) => {
   const handleSwitch = (id, type) => {
     switchList(id, type);
   };
@@ -21,6 +21,7 @@ const TableList = ({ id, taskList, switchList }) => {
                     <Button
                       clColor="btn-danger"
                       label={<i className="fa-solid fa-trash"></i>}
+                      deleteTask={() => deleteTask(item.id)}
                     />
                     <Button
                       clColor="btn-success"
@@ -47,6 +48,7 @@ const TableList = ({ id, taskList, switchList }) => {
                     <Button
                       clColor="btn-danger"
                       label={<i className="fa-solid fa-trash"></i>}
+                      deleteTask={() => deleteTask(item.id)}
                     />
                   </td>
                 </tr>

@@ -27,8 +27,13 @@ const App = () => {
     //   alert("Sorry no more hour then 168 per week");
     //   return;
     // }
-
-    //displayList();
+  };
+  const deleteTask = (id) => {
+    const result = window.confirm("Are you sure you want to delete this task?");
+    if (result) {
+      setTaskList(taskList.filter((item) => item.id !== id));
+    }
+    // console.log(id);
   };
 
   const switchList = (id, type) => {
@@ -66,7 +71,11 @@ const App = () => {
     <div className="wrapper">
       <div className="container">
         <Form addTask={addTask} />
-        <DisplayList taskList={taskList} switchList={switchList}></DisplayList>
+        <DisplayList
+          taskList={taskList}
+          switchList={switchList}
+          deleteTask={deleteTask}
+        ></DisplayList>
       </div>
     </div>
   );
