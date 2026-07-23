@@ -4,7 +4,7 @@ import Form from "./components/Form";
 import DisplayList from "./components/DisplayList";
 
 const App = () => {
-  let hourPerWeek = 24 * 7;
+  const hourPerWeek = 24 * 7;
   const [taskList, setTaskList] = useState([]);
 
   const addTask = (lists) => {
@@ -18,15 +18,16 @@ const App = () => {
     };
     // this doesn't work because the key hold the object not spread object
     //setTaskList({ ...taskList, obj });
+    // const tHr = taskList.reduce((acc, item) => acc + item.hour, 0);
+    // console.log(tHr);
+    // if (tHr + hour > hourPerWeek) {
+    //   alert("Sorry no hour more then 168 per week");
+    //   return;
+    // }
     setTaskList([...taskList, obj]);
     /*OR When you pass a function,
      React guarantees prev is the latest state at the time the update actually runs
     setTaskList((prev) => [...prev, obj]);*/
-
-    // if (getTotalHour() + hour > hourPerWeek) {
-    //   alert("Sorry no more hour then 168 per week");
-    //   return;
-    // }
   };
   const deleteTask = (id) => {
     const result = window.confirm("Are you sure you want to delete this task?");

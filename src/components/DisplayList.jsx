@@ -46,7 +46,13 @@ const DisplayList = ({ taskList, switchList, deleteTask }) => {
             switchList={switchList}
             deleteTask={deleteTask}
           />
-          <Message id="badHour" text="You could have saved = " />
+          <Message
+            id="badHour"
+            text="You could have saved = "
+            totalHour={taskList
+              .filter((task) => task.type === "bad")
+              .reduce((acc, item) => acc + Number(item.hour), 0)}
+          />
         </div>
       </div>
     </>
