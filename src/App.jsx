@@ -9,7 +9,8 @@ const App = () => {
 
   const addTask = (lists) => {
     const task = lists.task;
-    const hour = lists.hour;
+    // +lists.hour convert hour to number the same as Number(lists.hour);
+    const hour = +lists.hour;
     const obj = {
       task,
       hour,
@@ -18,12 +19,13 @@ const App = () => {
     };
     // this doesn't work because the key hold the object not spread object
     //setTaskList({ ...taskList, obj });
-    // const tHr = taskList.reduce((acc, item) => acc + item.hour, 0);
-    // console.log(tHr);
-    // if (tHr + hour > hourPerWeek) {
-    //   alert("Sorry no hour more then 168 per week");
-    //   return;
-    // }
+    const tHr = taskList.reduce((acc, item) => acc + Number(item.hour), 0);
+
+    if (tHr + hour > hourPerWeek) {
+      console.log(tHr + hour);
+      alert("Sorry no hour more then 168 per week");
+      return;
+    }
     setTaskList([...taskList, obj]);
     /*OR When you pass a function,
      React guarantees prev is the latest state at the time the update actually runs
