@@ -22,7 +22,6 @@ const App = () => {
     const tHr = taskList.reduce((acc, item) => acc + Number(item.hour), 0);
 
     if (tHr + hour > hourPerWeek) {
-      console.log(tHr + hour);
       alert("Sorry no hour more then 168 per week");
       return;
     }
