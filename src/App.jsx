@@ -77,7 +77,7 @@ const App = () => {
           taskList={taskList}
           switchList={switchList}
           deleteTask={deleteTask}
-        ></DisplayList>
+        />
       </div>
     </div>
   );

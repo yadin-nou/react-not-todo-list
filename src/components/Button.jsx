@@ -1,13 +1,15 @@
 import React from "react";
 
-const Button = (props) => {
+const Button = ({ clColor, label, fn }) => {
+  console.log(fn);
   return (
     <>
       <button
-        className={"btn " + props.clColor}
-        onClick={props.handleSwitch ? props.handleSwitch : props.deleteTask}
+        className={"btn " + clColor}
+        // props.handleSwitch ? props.handleSwitch : props.deleteTask
+        onClick={fn}
       >
-        {props.label}
+        {label}
       </button>
     </>
   );
