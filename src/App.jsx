@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import Form from "./components/Form";
 import DisplayList from "./components/DisplayList";
+import { addTasks } from "./helpers/axiosHelper";
 
 const App = () => {
   const hourPerWeek = 24 * 7;
@@ -29,6 +30,9 @@ const App = () => {
     /*OR When you pass a function,
      React guarantees prev is the latest state at the time the update actually runs
     setTaskList((prev) => [...prev, obj]);*/
+
+    //add to Database
+    addTasks(obj);
   };
   const deleteTask = (id) => {
     const result = window.confirm("Are you sure you want to delete this task?");
