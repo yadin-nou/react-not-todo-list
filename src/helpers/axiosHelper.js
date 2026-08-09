@@ -13,3 +13,15 @@ export const addTasks = async (data) => {
     };
   }
 };
+
+export const getTaskLists = async () => {
+  try {
+    const res = await axios.get(urlEP);
+    return res;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};

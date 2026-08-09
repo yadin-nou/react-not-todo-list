@@ -2,7 +2,8 @@ import { useState } from "react";
 import "./App.css";
 import Form from "./components/Form";
 import DisplayList from "./components/DisplayList";
-import { addTasks } from "./helpers/axiosHelper";
+import { addTasks, getTaskLists } from "./helpers/axiosHelper";
+import { useEffect } from "react";
 
 const App = () => {
   const hourPerWeek = 24 * 7;
@@ -16,8 +17,6 @@ const App = () => {
     const obj = {
       task,
       hour,
-      id: idGeneration(),
-      type: "entry",
     };
     // this doesn't work because the key hold the object not spread object
     //setTaskList({ ...taskList, obj });
@@ -27,7 +26,7 @@ const App = () => {
       alert("Sorry no hour more then 168 per week");
       return;
     }
-    setTaskList([...taskList, obj]);
+    // setTaskList([...taskList, obj]);
     /*OR When you pass a function,
      React guarantees prev is the latest state at the time the update actually runs
     setTaskList((prev) => [...prev, obj]);*/
@@ -35,6 +34,10 @@ const App = () => {
     //add to Database
     const respons = await addTasks(obj);
     respons ? setRes(respons) : {};
+
+    const getTaskList = await getTaskLists();
+    // console.log(getTaskList.data.tasks);
+    setTaskList(getTaskList.data.tasks);
   };
   const deleteTask = (id) => {
     const result = window.confirm("Are you sure you want to delete this task?");
