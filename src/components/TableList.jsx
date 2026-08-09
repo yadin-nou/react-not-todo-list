@@ -1,32 +1,73 @@
 import React from "react";
 import Button from "./Button";
+import { useState } from "react";
 
 const TableList = ({ id, taskList, switchList, deleteTask }) => {
+  const [selDelete, setSelDelete] = useState([]);
+
   const handleSwitch = (id, type) => {
     switchList(id, type);
   };
+
+  const handleSelect = (e) => {
+    const { checked, value } = e.target;
+    console.log(checked, value);
+    if (checked) {
+      if (value === "all-" + id) {
+        console.log(value, id);
+        const allID = taskList.map((item) => {
+          if (item.type === "entry") {
+            return item._id;
+          }
+        });
+        // setSelDelete([...selDelete, ...allID]);
+        console.log(allID, "---");
+        return;
+      }
+      setSelDelete([...selDelete, value]);
+    } else {
+      setSelDelete(selDelete.filter((_id) => _id !== value));
+    }
+  };
+  console.log(selDelete);
   return (
     <>
+      <input
+        className="form-check-input"
+        id={"all-" + id}
+        type="checkbox"
+        value={"all-" + id}
+        onChange={handleSelect}
+      />{" "}
+      <label htmlFor={"all-" + id}>Select All</label>
       <table className="table table-striped table-hover border">
         <tbody id={id}>
           {id === "entryList" &&
             taskList
               .filter((item) => item.type === "entry")
               .map((item, index) => (
-                <tr key={index}>
+                <tr key={item?._id}>
                   <td>{index + 1}</td>
-                  <td>{item.task}</td>
+                  <td>
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      value={item?._id}
+                      onChange={handleSelect}
+                    />{" "}
+                    {item.task}
+                  </td>
                   <td>{item.hour} hr</td>
                   <td className="text-end">
                     <Button
                       clColor="btn-danger"
                       label={<i className="fa-solid fa-trash"></i>}
-                      fn={() => deleteTask(item._id)}
+                      fn={() => deleteTask(item?._id)}
                     />
                     <Button
                       clColor="btn-success"
                       label={<i className="fa-solid fa-arrow-right"></i>}
-                      fn={() => handleSwitch(item._id, "bad")}
+                      fn={() => handleSwitch(item?._id, "bad")}
                     />
                   </td>
                 </tr>
@@ -35,9 +76,17 @@ const TableList = ({ id, taskList, switchList, deleteTask }) => {
             taskList
               .filter((item) => item.type === "bad")
               .map((item, index) => (
-                <tr key={index}>
+                <tr key={item?._id}>
                   <td>{index + 1}</td>
-                  <td>{item.task}</td>
+                  <td>
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      value={item?._id}
+                      onChange={handleSelect}
+                    />{" "}
+                    {item.task}
+                  </td>
                   <td>{item.hour} hr</td>
                   <td className="text-end">
                     <Button
