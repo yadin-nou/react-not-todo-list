@@ -34,11 +34,8 @@ const App = () => {
     //add to Database
     const respons = await addTasks(obj);
     respons ? setRes(respons) : {};
-
-    const getTaskList = await getTaskLists();
-    // console.log(getTaskList.data.tasks);
-    setTaskList(getTaskList.data.tasks);
   };
+
   const deleteTask = (id) => {
     const result = window.confirm("Are you sure you want to delete this task?");
     if (result) {
@@ -77,7 +74,13 @@ const App = () => {
     }
     return id;
   };
-
+  const fetchData = async () => {
+    const getTaskList = await getTaskLists();
+    getTaskList?.status === "sucess" && setTaskList(getTaskList.task);
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <div className="wrapper">
       <div className="container">

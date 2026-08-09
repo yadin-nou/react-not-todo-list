@@ -1,7 +1,7 @@
 import React from "react";
 
 const Button = ({ clColor, label, fn }) => {
-  console.log(fn);
+  //console.log(fn);
   return (
     <>
       <button

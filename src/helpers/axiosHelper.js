@@ -17,7 +17,7 @@ export const addTasks = async (data) => {
 export const getTaskLists = async () => {
   try {
     const res = await axios.get(urlEP);
-    return res;
+    return res.data;
   } catch (error) {
     return {
       status: "error",
