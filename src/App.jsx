@@ -10,7 +10,6 @@ const App = () => {
   const hourPerWeek = 24 * 7;
   const [taskList, setTaskList] = useState([]);
   const [res, setRes] = useState({});
-  const typeList = useRef(false);
   const addTask = async (lists) => {
     const task = lists.task;
     // +lists.hour convert hour to number the same as Number(lists.hour);
@@ -20,21 +19,21 @@ const App = () => {
       hour,
     };
     // this doesn't work because the key hold the object not spread object
-    //setTaskList({ ...taskList, obj });
     const tHr = taskList.reduce((acc, item) => acc + Number(item.hour), 0);
 
     if (tHr + hour > hourPerWeek) {
       alert("Sorry no hour more then 168 per week");
       return;
     }
-    // setTaskList([...taskList, obj]);
-    /*OR When you pass a function,
+    /*When you pass a function,
      React guarantees prev is the latest state at the time the update actually runs
     setTaskList((prev) => [...prev, obj]);*/
 
     //add to Database
     const respons = await addTasks(obj);
-    respons ? setRes(respons) : {};
+    respons?.status && setRes(respons);
+    //if (respons.status === "sucess") fetchData();
+    respons?.status && fetchData();
   };
 
   const deleteTask = (id) => {
@@ -48,25 +47,7 @@ const App = () => {
     const swTask = await switchTask(id, type);
     setRes(swTask);
     // console.log(swTask, "switch");
-    if (swTask.status === "sucess") fetchData();
-    // console.log(swTask, "switch");
-    // if (type === "entry") {
-    //   //   update type in taskList by unqiue id
-    //   setTaskList(
-    //     taskList.map((item) =>
-    //       item.id === id ? { ...item, type: "bad" } : item,
-    //     ),
-    //   );
-    //   // console.log("entry", id, type);
-    // }
-    // if (type === "bad") {
-    //   setTaskList(
-    //     taskList.map((item) =>
-    //       item.id === id ? { ...item, type: "entry" } : item,
-    //     ),
-    //   );
-    // console.log("bad", id, type);
-    //}
+    swTask?.status === "sucess" && fetchData();
   };
   // console.log(taskList);
   // const idGeneration = (length = 6) => {
@@ -82,7 +63,6 @@ const App = () => {
   const fetchData = async () => {
     const getTaskList = await getTaskLists();
     getTaskList?.status === "sucess" && setTaskList(getTaskList.task);
-    //typeList.current.value = true;
   };
   useEffect(() => {
     fetchData();

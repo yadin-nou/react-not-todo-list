@@ -2,9 +2,13 @@ import axios from "axios";
 
 const urlEP = "http://localhost:8000/api/v1/tasks";
 
-export const addTasks = async (data) => {
+const processAPI = async ({ method, data }) => {
   try {
-    const res = await axios.post(urlEP, data);
+    const res = await axios({
+      method,
+      url: urlEP,
+      data,
+    });
     return res.data;
   } catch (error) {
     return {
@@ -12,29 +16,27 @@ export const addTasks = async (data) => {
       message: error.message,
     };
   }
+};
+
+export const addTasks = async (data) => {
+  const obj = {
+    method: "post",
+    data,
+  };
+  return processAPI(obj);
 };
 
 export const getTaskLists = async () => {
-  try {
-    const res = await axios.get(urlEP);
-    return res.data;
-  } catch (error) {
-    return {
-      status: "error",
-      message: error.message,
-    };
-  }
+  const obj = {
+    method: "get",
+  };
+  return processAPI(obj);
 };
 
 export const switchTask = async (_id, type) => {
-  try {
-    // const dataJson = { _id, type };
-    const res = await axios.patch(urlEP, { _id, type });
-    return res.data;
-  } catch (error) {
-    return {
-      status: "error",
-      message: error.message,
-    };
-  }
+  const obj = {
+    method: "patch",
+    data: { _id, type },
+  };
+  return processAPI(obj);
 };

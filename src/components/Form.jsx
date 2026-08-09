@@ -23,18 +23,6 @@ const Form = ({ addTask, res }) => {
         <!-- class p-5 is for padding all follow up breakpoint -->
         <!-- class rounded sharp the cornor of border -->
         <!-- shadow is for making shadow --> */}
-      {res.message && (
-        <div
-          className={
-            res?.status === "sucess"
-              ? "alert alert-success"
-              : "alert alert-danger"
-          }
-          role="alert"
-        >
-          {res.message}
-        </div>
-      )}
 
       <form
         action=""
@@ -74,6 +62,18 @@ const Form = ({ addTask, res }) => {
           </div>
         </div>
       </form>
+      {res.message && (
+        <div
+          className={
+            res?.status === "sucess"
+              ? "alert alert-success pt-3 mt-2"
+              : "alert alert-danger pt-3 mt-2"
+          }
+          role="alert"
+        >
+          {res.message}
+        </div>
+      )}
     </>
   );
 };
