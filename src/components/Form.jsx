@@ -1,7 +1,7 @@
 import Button from "./Button";
 import { useState } from "react";
 
-const Form = ({ addTask }) => {
+const Form = ({ addTask, res }) => {
   const [task, setTask] = useState([]);
   const handleChange = (e) => {
     //get name and its value from text box
@@ -23,6 +23,19 @@ const Form = ({ addTask }) => {
         <!-- class p-5 is for padding all follow up breakpoint -->
         <!-- class rounded sharp the cornor of border -->
         <!-- shadow is for making shadow --> */}
+      {res.message && (
+        <div
+          className={
+            res?.status === "sucess"
+              ? "alert alert-success"
+              : "alert alert-danger"
+          }
+          role="alert"
+        >
+          {res.message}
+        </div>
+      )}
+
       <form
         action=""
         className="border p-5 rounded shadow mt-5"

@@ -7,8 +7,9 @@ import { addTasks } from "./helpers/axiosHelper";
 const App = () => {
   const hourPerWeek = 24 * 7;
   const [taskList, setTaskList] = useState([]);
+  const [res, setRes] = useState({});
 
-  const addTask = (lists) => {
+  const addTask = async (lists) => {
     const task = lists.task;
     // +lists.hour convert hour to number the same as Number(lists.hour);
     const hour = +lists.hour;
@@ -32,7 +33,8 @@ const App = () => {
     setTaskList((prev) => [...prev, obj]);*/
 
     //add to Database
-    addTasks(obj);
+    const respons = await addTasks(obj);
+    respons ? setRes(respons) : {};
   };
   const deleteTask = (id) => {
     const result = window.confirm("Are you sure you want to delete this task?");
@@ -76,7 +78,7 @@ const App = () => {
   return (
     <div className="wrapper">
       <div className="container">
-        <Form addTask={addTask} />
+        <Form addTask={addTask} res={res} />
         <DisplayList
           taskList={taskList}
           switchList={switchList}
