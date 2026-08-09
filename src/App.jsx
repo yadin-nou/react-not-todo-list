@@ -46,8 +46,9 @@ const App = () => {
   };
   const switchList = async (id, type) => {
     const swTask = await switchTask(id, type);
-    console.log(swTask, "switch");
-    fetchData();
+    setRes(swTask);
+    // console.log(swTask, "switch");
+    if (swTask.status === "sucess") fetchData();
     // console.log(swTask, "switch");
     // if (type === "entry") {
     //   //   update type in taskList by unqiue id
