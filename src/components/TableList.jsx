@@ -21,12 +21,12 @@ const TableList = ({ id, taskList, switchList, deleteTask }) => {
                     <Button
                       clColor="btn-danger"
                       label={<i className="fa-solid fa-trash"></i>}
-                      fn={() => deleteTask(item.id)}
+                      fn={() => deleteTask(item._id)}
                     />
                     <Button
                       clColor="btn-success"
                       label={<i className="fa-solid fa-arrow-right"></i>}
-                      fn={() => handleSwitch(item.id, "entry")}
+                      fn={() => handleSwitch(item._id, "bad")}
                     />
                   </td>
                 </tr>
@@ -43,12 +43,12 @@ const TableList = ({ id, taskList, switchList, deleteTask }) => {
                     <Button
                       clColor="btn-warning"
                       label={<i className="fa-solid fa-arrow-left"></i>}
-                      fn={() => handleSwitch(item.id, "bad")}
+                      fn={() => handleSwitch(item._id, "entry")}
                     />
                     <Button
                       clColor="btn-danger"
                       label={<i className="fa-solid fa-trash"></i>}
-                      fn={() => deleteTask(item.id)}
+                      fn={() => deleteTask(item._id)}
                     />
                   </td>
                 </tr>

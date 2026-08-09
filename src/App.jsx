@@ -2,14 +2,15 @@ import { useState } from "react";
 import "./App.css";
 import Form from "./components/Form";
 import DisplayList from "./components/DisplayList";
-import { addTasks, getTaskLists } from "./helpers/axiosHelper";
+import { addTasks, getTaskLists, switchTask } from "./helpers/axiosHelper";
 import { useEffect } from "react";
+import { useRef } from "react";
 
 const App = () => {
   const hourPerWeek = 24 * 7;
   const [taskList, setTaskList] = useState([]);
   const [res, setRes] = useState({});
-
+  const typeList = useRef(false);
   const addTask = async (lists) => {
     const task = lists.task;
     // +lists.hour convert hour to number the same as Number(lists.hour);
@@ -43,40 +44,44 @@ const App = () => {
     }
     // console.log(id);
   };
-
-  const switchList = (id, type) => {
-    if (type === "entry") {
-      //   update type in taskList by unqiue id
-      setTaskList(
-        taskList.map((item) =>
-          item.id === id ? { ...item, type: "bad" } : item,
-        ),
-      );
-      // console.log("entry", id, type);
-    }
-    if (type === "bad") {
-      setTaskList(
-        taskList.map((item) =>
-          item.id === id ? { ...item, type: "entry" } : item,
-        ),
-      );
-      // console.log("bad", id, type);
-    }
+  const switchList = async (id, type) => {
+    const swTask = await switchTask(id, type);
+    console.log(swTask, "switch");
+    fetchData();
+    // console.log(swTask, "switch");
+    // if (type === "entry") {
+    //   //   update type in taskList by unqiue id
+    //   setTaskList(
+    //     taskList.map((item) =>
+    //       item.id === id ? { ...item, type: "bad" } : item,
+    //     ),
+    //   );
+    //   // console.log("entry", id, type);
+    // }
+    // if (type === "bad") {
+    //   setTaskList(
+    //     taskList.map((item) =>
+    //       item.id === id ? { ...item, type: "entry" } : item,
+    //     ),
+    //   );
+    // console.log("bad", id, type);
+    //}
   };
   // console.log(taskList);
-  const idGeneration = (length = 6) => {
-    const str =
-      "pxzksjkjfoiajhklajoinakljhhanskjeiABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-    let id = "";
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * str.length);
-      id += str[randomIndex];
-    }
-    return id;
-  };
+  // const idGeneration = (length = 6) => {
+  //   const str =
+  //     "pxzksjkjfoiajhklajoinakljhhanskjeiABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+  //   let id = "";
+  //   for (let i = 0; i < length; i++) {
+  //     const randomIndex = Math.floor(Math.random() * str.length);
+  //     id += str[randomIndex];
+  //   }
+  //   return id;
+  // };
   const fetchData = async () => {
     const getTaskList = await getTaskLists();
     getTaskList?.status === "sucess" && setTaskList(getTaskList.task);
+    //typeList.current.value = true;
   };
   useEffect(() => {
     fetchData();

@@ -25,3 +25,17 @@ export const getTaskLists = async () => {
     };
   }
 };
+
+export const switchTask = async (_id, type) => {
+  try {
+    const dataJson = { _id, type };
+    const res = await axios.patch(urlEP, dataJson);
+    // console.log(res.data, "axios");
+    return res.data;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};
