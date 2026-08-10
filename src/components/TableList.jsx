@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const TableList = ({ id, taskList, switchList, deleteTask }) => {
   const [selDelete, setSelDelete] = useState([]);
-
+  // const [chED, setchED] = useState(false);
   const handleSwitch = (id, type) => {
     switchList(id, type);
   };
@@ -14,6 +14,7 @@ const TableList = ({ id, taskList, switchList, deleteTask }) => {
     //console.log(checked, value);
     if (checked) {
       if (value === "all-entryList") {
+        //  setchED(true);
         //console.log(value, id);
         const allID = taskList
           .filter((item) => item.type === "entry")
@@ -26,6 +27,7 @@ const TableList = ({ id, taskList, switchList, deleteTask }) => {
       setSelDelete([...selDelete, value]);
     } else {
       if (value === "all-entryList") {
+        //setchED(false);
         //console.log(value, id);
         const entryID = taskList
           .filter((item) => item.type === "entry")
@@ -34,10 +36,11 @@ const TableList = ({ id, taskList, switchList, deleteTask }) => {
         setSelDelete(selDelete.filter((item) => !entryID.includes(item)));
         return;
       }
+      //console.log(checked, id);
       setSelDelete(selDelete.filter((_id) => _id !== value));
     }
   };
-  console.log(selDelete);
+  // console.log(selDelete);
   return (
     <>
       <input
@@ -61,6 +64,7 @@ const TableList = ({ id, taskList, switchList, deleteTask }) => {
                       className="form-check-input"
                       type="checkbox"
                       value={item?._id}
+                      checked={selDelete.includes(item?._id)}
                       onChange={handleSelect}
                     />{" "}
                     {item.task}
