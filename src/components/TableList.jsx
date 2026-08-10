@@ -11,21 +11,29 @@ const TableList = ({ id, taskList, switchList, deleteTask }) => {
 
   const handleSelect = (e) => {
     const { checked, value } = e.target;
-    console.log(checked, value);
+    //console.log(checked, value);
     if (checked) {
-      if (value === "all-" + id) {
-        console.log(value, id);
-        const allID = taskList.map((item) => {
-          if (item.type === "entry") {
-            return item._id;
-          }
-        });
+      if (value === "all-entryList") {
+        //console.log(value, id);
+        const allID = taskList
+          .filter((item) => item.type === "entry")
+          .map((item) => item._id);
         // setSelDelete([...selDelete, ...allID]);
-        console.log(allID, "---");
+        setSelDelete(allID);
+        // console.log(allID, "---");
         return;
       }
       setSelDelete([...selDelete, value]);
     } else {
+      if (value === "all-entryList") {
+        //console.log(value, id);
+        const entryID = taskList
+          .filter((item) => item.type === "entry")
+          .map((item) => item._id);
+        //console.log(entry, " IDentry");
+        setSelDelete(selDelete.filter((item) => !entryID.includes(item)));
+        return;
+      }
       setSelDelete(selDelete.filter((_id) => _id !== value));
     }
   };
