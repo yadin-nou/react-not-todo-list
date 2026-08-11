@@ -18,36 +18,39 @@ const TableList = ({
 
   const handleSelect = (e) => {
     const { checked, value } = e.target;
-    let tempID = [];
-    if (value === "all-entryList") {
-      tempID = taskList
-        .filter((item) => item.type === "entry")
-        .map((item) => item._id);
-    }
-    if (value === "all-badList") {
-      tempID = taskList
-        .filter((item) => item.type === "bad")
-        .map((item) => item._id);
-    }
+    const entryList = taskList
+      .filter((item) => item.type === "entry")
+      .map((item) => item._id);
+
+    const badList = taskList
+      .filter((item) => item.type === "bad")
+      .map((item) => item._id);
 
     if (checked) {
-      if (value === "all-entryList" || value === "all-badList") {
-        setSelDelete([...selDelete, ...tempID]);
+      if (value === "all-entryList") {
+        setSelDelete([...new Set([...selDelete, ...entryList])]);
+        return;
+      }
+      if (value === "all-badList") {
+        setSelDelete([...new Set([...selDelete, ...badList])]);
         return;
       }
 
       setSelDelete([...selDelete, value]);
     } else {
-      if (value === "all-entryList" || value === "all-badList") {
-        setSelDelete(selDelete.filter((item) => !tempID.includes(item)));
+      if (value === "all-entryList") {
+        setSelDelete(selDelete.filter((item) => !entryList.includes(item)));
+        return;
+      }
+      if (value === "all-badList") {
+        setSelDelete(selDelete.filter((item) => !badList.includes(item)));
         return;
       }
 
       setSelDelete(selDelete.filter((_id) => _id !== value));
     }
   };
-
-  console.log(selDelete);
+  useEffect(() => console.log(selDelete), [selDelete]);
 
   return (
     <>
