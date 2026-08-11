@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import TableList from "./TableList";
 import Message from "./Message";
 
 const DisplayList = ({ taskList, switchList, deleteTask }) => {
+  //pass selDelete and setSelDelete to child components to control checkbox
+  // bad list and entry list as one state
+  // because selDelete will seperate own state when Tabelist is called
+  const [selDelete, setSelDelete] = useState([]);
   // console.log("display", taskList);
   //const [totalHour, setTotalHour] = useState(0);
 
@@ -26,6 +30,8 @@ const DisplayList = ({ taskList, switchList, deleteTask }) => {
             taskList={taskList}
             switchList={switchList}
             deleteTask={deleteTask}
+            selDelete={selDelete}
+            setSelDelete={setSelDelete}
           />
           <Message
             id="entryHour"
@@ -45,6 +51,8 @@ const DisplayList = ({ taskList, switchList, deleteTask }) => {
             taskList={taskList}
             switchList={switchList}
             deleteTask={deleteTask}
+            selDelete={selDelete}
+            setSelDelete={setSelDelete}
           />
           <Message
             id="badHour"
