@@ -17,7 +17,11 @@ const DisplayList = ({ taskList, switchList, deleteTask }) => {
   // setTotalHour(totalHr);
 
   //};
-
+  //console.log(selDelete);
+  const handleDelete = (e) => {
+    e.preventDefault();
+    deleteTask(selDelete);
+  };
   return (
     <>
       <div className="row mt-5">
@@ -62,6 +66,11 @@ const DisplayList = ({ taskList, switchList, deleteTask }) => {
               .reduce((acc, item) => acc + Number(item.hour), 0)}
           />
         </div>
+      </div>
+      <div className="d-grid col-12 mx-auto">
+        <button className="btn btn-danger" type="button">
+          Delete {selDelete.length} task(s)
+        </button>
       </div>
     </>
   );

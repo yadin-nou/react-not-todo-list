@@ -1,17 +1,7 @@
 import React, { useEffect } from "react";
 import Button from "./Button";
-import { useState } from "react";
 
-const TableList = ({
-  id,
-  taskList,
-  switchList,
-  deleteTask,
-  selDelete,
-  setSelDelete,
-}) => {
-  //const [selDelete, setSelDelete] = useState([]);
-
+const TableList = ({ id, taskList, switchList, selDelete, setSelDelete }) => {
   const handleSwitch = (id, type) => {
     switchList(id, type);
   };
@@ -50,7 +40,6 @@ const TableList = ({
       setSelDelete(selDelete.filter((_id) => _id !== value));
     }
   };
-  useEffect(() => console.log(selDelete), [selDelete]);
 
   return (
     <>
@@ -84,11 +73,6 @@ const TableList = ({
                   <td>{item.hour} hr</td>
                   <td className="text-end">
                     <Button
-                      clColor="btn-danger"
-                      label={<i className="fa-solid fa-trash"></i>}
-                      fn={() => deleteTask(item?._id)}
-                    />
-                    <Button
                       clColor="btn-success"
                       label={<i className="fa-solid fa-arrow-right"></i>}
                       fn={() => handleSwitch(item?._id, "bad")}
@@ -119,11 +103,6 @@ const TableList = ({
                       clColor="btn-warning"
                       label={<i className="fa-solid fa-arrow-left"></i>}
                       fn={() => handleSwitch(item._id, "entry")}
-                    />
-                    <Button
-                      clColor="btn-danger"
-                      label={<i className="fa-solid fa-trash"></i>}
-                      fn={() => deleteTask(item._id)}
                     />
                   </td>
                 </tr>
