@@ -17,10 +17,11 @@ const DisplayList = ({ taskList, switchList, deleteTask }) => {
   // setTotalHour(totalHr);
 
   //};
-  //console.log(selDelete);
+
   const handleDelete = (e) => {
     e.preventDefault();
     deleteTask(selDelete);
+    //console.log(selDelete);
   };
   return (
     <>
@@ -33,7 +34,6 @@ const DisplayList = ({ taskList, switchList, deleteTask }) => {
             id="entryList"
             taskList={taskList}
             switchList={switchList}
-            deleteTask={deleteTask}
             selDelete={selDelete}
             setSelDelete={setSelDelete}
           />
@@ -54,7 +54,6 @@ const DisplayList = ({ taskList, switchList, deleteTask }) => {
             id="badList"
             taskList={taskList}
             switchList={switchList}
-            deleteTask={deleteTask}
             selDelete={selDelete}
             setSelDelete={setSelDelete}
           />
@@ -68,7 +67,7 @@ const DisplayList = ({ taskList, switchList, deleteTask }) => {
         </div>
       </div>
       <div className="d-grid col-12 mx-auto">
-        <button className="btn btn-danger" type="button">
+        <button className="btn btn-danger" type="button" onClick={handleDelete}>
           Delete {selDelete.length} task(s)
         </button>
       </div>

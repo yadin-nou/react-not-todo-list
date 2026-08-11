@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import Button from "./Button";
 
 const TableList = ({ id, taskList, switchList, selDelete, setSelDelete }) => {

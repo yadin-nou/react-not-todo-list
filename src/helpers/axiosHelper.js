@@ -41,6 +41,10 @@ export const switchTask = async (_id, type) => {
   return processAPI(obj);
 };
 
-export const deleteTask = async (data) => {
-  return processAPI(data);
+export const deleteTaskAPI = async (data) => {
+  const obj = {
+    method: "delete",
+    data,
+  };
+  return processAPI(obj);
 };
