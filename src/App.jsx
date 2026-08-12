@@ -42,13 +42,15 @@ const App = () => {
   };
 
   const deleteTask = async (data) => {
-    const result = window.confirm("Are you sure you want to delete this task?");
-    if (result) {
-      // setTaskList(taskList.filter((item) => item.id !== id));
-      const del = await deleteTaskAPI(data);
-      del?.status && fetchData();
-      //console.log(del);
-    }
+    // if (data.length > 0) {
+    //   const result = confirm("Are you sure you want to delete this task?");
+    //   if (result) {
+    // setTaskList(taskList.filter((item) => item.id !== id));
+    const del = await deleteTaskAPI(data);
+    del?.status && fetchData();
+    //console.log(del);
+    //  }
+    // }
   };
   const switchList = async (id, type) => {
     const swTask = await switchTask(id, type);

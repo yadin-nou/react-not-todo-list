@@ -20,7 +20,13 @@ const DisplayList = ({ taskList, switchList, deleteTask }) => {
 
   const handleDelete = (e) => {
     e.preventDefault();
-    deleteTask(selDelete);
+    if (selDelete.length > 0) {
+      const result = confirm("Are you sure you want to delete this task?");
+      if (result) {
+        deleteTask(selDelete);
+        setSelDelete([]);
+      }
+    }
     //console.log(selDelete);
   };
   return (
