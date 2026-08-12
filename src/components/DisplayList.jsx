@@ -26,6 +26,7 @@ const DisplayList = ({ taskList, switchList, deleteTask, res }) => {
       deleteTask(selDelete);
       //setSelDelete([]);
     }
+
     if (res.status === "sucess") {
       setSelDelete([]);
     } else return;
