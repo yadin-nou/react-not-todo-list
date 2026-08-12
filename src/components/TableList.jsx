@@ -17,6 +17,9 @@ const TableList = ({ id, taskList, switchList, selDelete, setSelDelete }) => {
 
     if (checked) {
       if (value === "all-entryList") {
+        //replace selDelete with this new merged array from
+        //previous selDelete and entryList
+        // ...new Set ([]) convert it to unique id
         setSelDelete([...new Set([...selDelete, ...entryList])]);
         return;
       }
@@ -24,7 +27,7 @@ const TableList = ({ id, taskList, switchList, selDelete, setSelDelete }) => {
         setSelDelete([...new Set([...selDelete, ...badList])]);
         return;
       }
-
+      //individual checked value which is not select all
       setSelDelete([...selDelete, value]);
     } else {
       if (value === "all-entryList") {
