@@ -51,6 +51,7 @@ const Form = ({ addTask, res }) => {
               aria-label="hour"
               name="hour"
               min="1"
+              max="100"
               required
               onChange={handleChange}
             />
