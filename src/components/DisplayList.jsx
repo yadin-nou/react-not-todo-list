@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import TableList from "./TableList";
 import Message from "./Message";
 
-const DisplayList = ({ taskList, switchList, deleteTask }) => {
+const DisplayList = ({ taskList, switchList, deleteTask, res }) => {
   //pass selDelete and setSelDelete to child components to control checkbox
   // bad list and entry list as one state
   // because selDelete will seperate own state when Tabelist is called
@@ -20,13 +20,16 @@ const DisplayList = ({ taskList, switchList, deleteTask }) => {
 
   const handleDelete = (e) => {
     e.preventDefault();
-    if (selDelete.length > 0) {
-      const result = confirm("Are you sure you want to delete this task?");
-      if (result) {
-        deleteTask(selDelete);
-        setSelDelete([]);
-      }
+    //if (selDelete.length > 0) {
+    const result = confirm("Are you sure you want to delete this task?");
+    if (result) {
+      deleteTask(selDelete);
+      //setSelDelete([]);
     }
+    if (res.status === "sucess") {
+      setSelDelete([]);
+    } else return;
+    // }
     //console.log(selDelete);
   };
   return (
@@ -73,9 +76,15 @@ const DisplayList = ({ taskList, switchList, deleteTask }) => {
         </div>
       </div>
       <div className="d-grid col-12 mx-auto">
-        <button className="btn btn-danger" type="button" onClick={handleDelete}>
-          Delete {selDelete.length} task(s)
-        </button>
+        {selDelete.length > 0 && (
+          <button
+            className="btn btn-danger"
+            type="button"
+            onClick={handleDelete}
+          >
+            Delete {selDelete.length} task(s)
+          </button>
+        )}
       </div>
     </>
   );

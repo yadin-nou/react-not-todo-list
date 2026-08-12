@@ -9,7 +9,6 @@ import {
   switchTask,
 } from "./helpers/axiosHelper";
 import { useEffect } from "react";
-import { useRef } from "react";
 
 const App = () => {
   const hourPerWeek = 24 * 7;
@@ -46,8 +45,9 @@ const App = () => {
     //   const result = confirm("Are you sure you want to delete this task?");
     //   if (result) {
     // setTaskList(taskList.filter((item) => item.id !== id));
-    const del = await deleteTaskAPI(data);
-    del?.status && fetchData();
+    const delRes = await deleteTaskAPI(data);
+    delRes?.status && setRes(delRes);
+    delRes?.status && fetchData();
     //console.log(del);
     //  }
     // }
@@ -84,6 +84,7 @@ const App = () => {
           taskList={taskList}
           switchList={switchList}
           deleteTask={deleteTask}
+          res={res}
         />
       </div>
     </div>

@@ -71,7 +71,7 @@ const Form = ({ addTask, res }) => {
           }
           role="alert"
         >
-          {res.message}
+          {res.message} <span style={{ color: "purple" }}>{res?.count}</span>
         </div>
       )}
     </>
