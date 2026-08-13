@@ -2,7 +2,7 @@ import axios from "axios";
 
 //const urlEP = "http://localhost:8000/api/v1/tasks";
 // change url when deploy to the server hosting
-const urlEP = import.meta.env.NODE_ENV
+const urlEP = import.meta.env.PROD
   ? "/api/v1/tasks"
   : "http://localhost:8000/api/v1/tasks";
 const processAPI = async ({ method, data }) => {
