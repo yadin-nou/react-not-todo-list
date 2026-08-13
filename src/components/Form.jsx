@@ -1,7 +1,7 @@
 import Button from "./Button";
 import { useState } from "react";
 
-const Form = ({ addTask }) => {
+const Form = ({ addTask, res }) => {
   const [task, setTask] = useState([]);
   const handleChange = (e) => {
     //get name and its value from text box
@@ -23,6 +23,7 @@ const Form = ({ addTask }) => {
         <!-- class p-5 is for padding all follow up breakpoint -->
         <!-- class rounded sharp the cornor of border -->
         <!-- shadow is for making shadow --> */}
+
       <form
         action=""
         className="border p-5 rounded shadow mt-5"
@@ -50,6 +51,7 @@ const Form = ({ addTask }) => {
               aria-label="hour"
               name="hour"
               min="1"
+              max="100"
               required
               onChange={handleChange}
             />
@@ -61,6 +63,18 @@ const Form = ({ addTask }) => {
           </div>
         </div>
       </form>
+      {res.message && (
+        <div
+          className={
+            res?.status === "sucess"
+              ? "alert alert-success pt-3 mt-2"
+              : "alert alert-danger pt-3 mt-2"
+          }
+          role="alert"
+        >
+          {res.message} <span style={{ color: "purple" }}>{res?.count}</span>
+        </div>
+      )}
     </>
   );
 };
