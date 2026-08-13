@@ -18,7 +18,7 @@ const Form = ({ addTask, res }) => {
   };
   return (
     <>
-      <h1 className="text-center">Not To Do List</h1>
+      <h1 className="text-center">Not To Do List...</h1>
       {/* <!-- Form -->
         <!-- class p-5 is for padding all follow up breakpoint -->
         <!-- class rounded sharp the cornor of border -->
