@@ -3,7 +3,7 @@ import axios from "axios";
 //const urlEP = "http://localhost:8000/api/v1/tasks";
 // change url when deploy to the server hosting
 const urlEP = import.meta.env.VITE_SEVER_URL + "/api/v1/tasks";
-
+console.log(urlEP);
 const processAPI = async ({ method, data }) => {
   try {
     const res = await axios({
