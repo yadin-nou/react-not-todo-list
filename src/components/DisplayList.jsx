@@ -1,7 +1,7 @@
 import { useState } from "react";
 import TableList from "./TableList";
 import Message from "./Message";
-
+import Spinner from "react-bootstrap/Spinner";
 const DisplayList = ({ taskList, switchList, deleteTask, res }) => {
   //pass selDelete and setSelDelete to child components to control checkbox
   // bad list and entry list as one state
@@ -37,6 +37,7 @@ const DisplayList = ({ taskList, switchList, deleteTask, res }) => {
     <>
       <div className="row mt-5">
         {/* <!-- md make it responsive --> */}
+
         <div className="col-md">
           <h3 className="text-center">Entry List</h3>
           <hr />

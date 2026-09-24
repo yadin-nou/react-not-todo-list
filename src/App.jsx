@@ -9,6 +9,7 @@ import {
   switchTask,
 } from "./helpers/axiosHelper";
 import { useEffect } from "react";
+import Spinner from "react-bootstrap/esm/Spinner";
 
 const App = () => {
   const hourPerWeek = 24 * 7;

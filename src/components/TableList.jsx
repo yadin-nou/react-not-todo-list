@@ -1,3 +1,4 @@
+import Spinner from "react-bootstrap/esm/Spinner";
 import Button from "./Button";
 
 const TableList = ({ id, taskList, switchList, selDelete, setSelDelete }) => {
